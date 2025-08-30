@@ -9,7 +9,9 @@
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    while(true){
+
+
+    document.getElementById('status-check').addEventListener('click', () => {
         setTimeout(async() => {
             const accountService = status_request('https://projectory-account-services.onrender.com/server-status');
             const hyperlinkService = status_request('https://projectory-hyperlink-services.onrender.com/server-status');
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(response.detail){
                     if(response.detail == 'Missing user email'){
                         activate_indicator_light("removal-services", true);
+                        console.log("\n removal services endpoint", " active");
                         return;
                     }
                 }
@@ -34,8 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(error);
             }
             activate_indicator_light("removal-services", false);
-        }, 2000);
-    }
+            console.log("\n removal services endpoint ", " disabled");
+        }, 1000);
+    })
 });
 
 const activate_indicator_light = function(id, status){
@@ -58,11 +62,13 @@ const status_request = async(endpoint) => {
         });
         if(response.status){
             if(response.status == 200){
+                console.log("\n ", endpoint, " active");
                 return true;
             }
         }
     }catch(error){
         console.log(error);
     }
+    console.log("\n ", endpoint, " disabled");
     return false;
 }

@@ -1,7 +1,7 @@
 
 
 :root{
-    --border-color: rgba(255, 0, 0, 1);
+    --border-color: rgba(255, 0, 0, 0);
     --service-indicator-default: rgb(100, 100, 100);
 
 
@@ -10,7 +10,7 @@
 
 html,body{
     margin: 0px;
-    padding: 0px;
+    padding: 10px;
     height: 100%;
     width: 100%;
     border: 2px solid var(--border-color);
@@ -55,5 +55,10 @@ html,body{
 
 .inactive{
     background-color: red;
+}
+
+button{
+    height: 15%;
+    width: 35%;
 }
 
