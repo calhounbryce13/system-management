@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 if(response.detail){
-                    if(response.detail == 'Missing user email'){
+                    if(response.detail.toLowerCase() == 'bad request'){
                         activate_indicator_light("removal-services", true);
                         console.log("\n removal services endpoint", " active");
                         return;
