@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(error);
             }
             activate_indicator_light("removal-services", false);
-        }, 500);
+        }, 2000);
     }
 });
 
