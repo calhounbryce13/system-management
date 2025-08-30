@@ -8,45 +8,34 @@
 
 
 
-document.addEventListener('DOMContentLoaded', async() => {
-
-
-
-    const accountService = status_request('https://projectory-account-services.onrender.com/server-status');
-    const hyperlinkService = status_request('https://projectory-hyperlink-services.onrender.com/server-status');
-    const projectMgmtService = status_request('https://projectory-project-management-services.onrender.com/server-status');
-
-    activate_indicator_light("account-services", await accountService);
-    activate_indicator_light("hyperlink-services", await hyperlinkService);
-    activate_indicator_light("projectMgmt-services", await projectMgmtService);
-
-
-    try{
-        let response = await fetch('https://projectory-data-removal-services.onrender.com/deletion', {
-            method: "DELETE",
-            headers: {
-                "Content-type": "application/json"
+document.addEventListener('DOMContentLoaded', () => {
+    while(true){
+        setTimeout(async() => {
+            const accountService = status_request('https://projectory-account-services.onrender.com/server-status');
+            const hyperlinkService = status_request('https://projectory-hyperlink-services.onrender.com/server-status');
+            const projectMgmtService = status_request('https://projectory-project-management-services.onrender.com/server-status');
+            activate_indicator_light("account-services", await accountService);
+            activate_indicator_light("hyperlink-services", await hyperlinkService);
+            activate_indicator_light("projectMgmt-services", await projectMgmtService);
+            try{
+                let response = await fetch('https://projectory-data-removal-services.onrender.com/deletion', {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                });
+                if(response.detail){
+                    if(response.detail == 'Missing user email'){
+                        activate_indicator_light("removal-services", true);
+                        return;
+                    }
+                }
+            }catch(error){
+                console.log(error);
             }
-        });
-        if(response.detail){
-            if(response.detail == 'Missing user email'){
-                activate_indicator_light("removal-services", true);
-                return;
-            }
-        }
-    }catch(error){
-        console.log(error);
+            activate_indicator_light("removal-services", false);
+        }, 500);
     }
-    activate_indicator_light("removal-services", false);
-
-
-
-
-
-
-
-
-
 });
 
 const activate_indicator_light = function(id, status){
