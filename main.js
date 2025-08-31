@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         "Content-type": "application/json"
                     }
                 });
+                console.log("\nremoval service response data: ", response);
                 if(response.detail){
                     if(response.detail.toLowerCase() == 'bad request'){
                         activate_indicator_light("removal-services", true);
