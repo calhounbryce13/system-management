@@ -27,12 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 console.log("\nremoval service response data: ", response);
-                if(response.detail){
-                    if(response.detail.toLowerCase() == 'bad request'){
-                        activate_indicator_light("removal-services", true);
-                        console.log("\n removal services endpoint", " active");
-                        return;
-                    }
+                if(!response.redirected){
+                    activate_indicator_light("removal-services", true);
+                    console.log("\n removal services endpoint", " active");
+                    return;
                 }
             }catch(error){
                 console.log(error);
