@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         "Content-type": "application/json"
                     }
                 });
-                console.log("\nremoval service response data: ", response);
                 if(!response.redirected){
                     activate_indicator_light("removal-services", true);
                     console.log("\n removal services endpoint", " active");
