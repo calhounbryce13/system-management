@@ -56,7 +56,7 @@ const status_request = async(endpoint) => {
     try{
         let response = await fetch(endpoint, {
             method: "GET", 
-            headers: {"Content-type": "application/json"} 
+            headers: {"Content-Type": "application/json"} 
             
         });
         if(response.status){
